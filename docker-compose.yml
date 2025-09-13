@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: autumn_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: rails server -b 0.0.0.0 -p 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/rails
+      - bundle:/usr/local/bundle
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  bundle:

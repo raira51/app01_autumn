@@ -1,0 +1,35 @@
+# ベースイメージ
+FROM ruby:3.2.3-slim
+
+# 作業ディレクトリ
+WORKDIR /rails
+
+# 環境変数
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="production"
+
+# 基本パッケージ & Node.js/Yarn インストール
+RUN apt-get update -qq && \
+    apt-get install -y build-essential git curl libpq-dev libvips pkg-config && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install -g yarn && \
+    rm -rf /var/lib/apt/lists/*
+
+# Gemfile コピーして Bundler インストール
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler && bundle install
+
+# yarn.lock コピーして Yarn install
+COPY yarn.lock ./
+RUN yarn install
+
+# プロジェクト全体コピー
+COPY . .
+
+# ポート公開
+EXPOSE 3000
+
+# コンテナ起動時のコマンド
+CMD ["rails", "server", "-b", "0.0.0.0","-p","3000"]
