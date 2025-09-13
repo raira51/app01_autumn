@@ -1,9 +1,52 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+words = [
+  { word: "栗拾い", category: "upper", is_season: true },
+  { word: "赤とんぼ", category: "upper", is_season: true },
+  { word: "秋深き", category: "upper", is_season: true },
+  { word: "流れ星", category: "upper", is_season: true },
+  { word: "夏過ぎて", category: "upper", is_season: false },
+  { word: "食べ過ぎて", category: "upper", is_season: false },
+  { word: "会いたくて", category: "upper", is_season: false },
+  { word: "秋風や", category: "upper", is_season: true },
+  { word: "鈴虫の", category: "upper", is_season: true },
+  { word: "秋の夜", category: "upper", is_season: true },
+  { word: "おもむろに", category: "upper", is_season: false },
+  { word: "忘れじの", category: "upper", is_season: false },
+  { word: "寝ころび見えた", category: "middle", is_season: false },
+  { word: "畳の上に", category: "middle", is_season: false },
+  { word: "見上げた空に", category: "middle", is_season: false },
+  { word: "思い出すのは", category: "middle", is_season: false },
+  { word: "高鳴る鼓動", category: "middle", is_season: false },
+  { word: "願いを込めて", category: "middle", is_season: false },
+  { word: "赤く染まった", category: "middle", is_season: false },
+  { word: "あたり一面", category: "middle", is_season: false },
+  { word: "願うは今宵", category: "middle", is_season: false },
+  { word: "心弾ませ", category: "middle", is_season: false },
+  { word: "悲しみに暮れ", category: "middle", is_season: false },
+  { word: "今は戻らぬ", category: "middle", is_season: false },
+  { word: "紅葉舞う空", category: "middle", is_season: true },
+  { word: "秋の夕暮れ", category: "middle", is_season: true },
+  { word: "十六夜の月", category: "middle", is_season: true },
+  { word: "秋の空", category: "lower", is_season: true },
+  { word: "運動会", category: "lower", is_season: true },
+  { word: "天の川", category: "lower", is_season: true },
+  { word: "君の声", category: "lower", is_season: false },
+  { word: "秋の風", category: "lower", is_season: true },
+  { word: "虫の声", category: "lower", is_season: true },
+  { word: "夜もすがら", category: "lower", is_season: false },
+  { word: "夢を見る", category: "lower", is_season: false },
+  { word: "星付夜", category: "lower", is_season: true },
+  { word: "切なさに", category: "lower", is_season: false },
+  { word: "ありがとう", category: "lower", is_season: false },
+  { word: "帰り道", category: "lower", is_season: false },
+  { word: "待ち合わせ", category: "lower", is_season: false },
+  { word: "二つ星", category: "lower", is_season: true },
+  { word: "走り出す", category: "lower", is_season: false },
+  { word: "もう一度", category: "lower", is_season: false },
+  { word: "さようなら", category: "lower", is_season: false },
+  { word: "またいつか", category: "lower", is_season: false },
+  { word: "追いかける", category: "lower", is_season: false },
+]
+
+words.each do |w|
+  SeasonWord.find_or_create_by(w)
+end
